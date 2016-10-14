@@ -12,9 +12,12 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from os.path import abspath, basename, dirname, join, normpath
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+# Replace BASE_DIR with this
+DJANGO_ROOT = dirname(dirname(abspath(__file__)))
+SITE_ROOT = dirname(DJANGO_ROOT)
+SITE_NAME = basename(DJANGO_ROOT)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -37,6 +40,12 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Pipeline
+    'pipline',
+
+    # DRF
+    'rest_framework',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -55,7 +64,7 @@ ROOT_URLCONF = 'cove.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,7 +86,7 @@ WSGI_APPLICATION = 'cove.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(DJANGO_ROOT, 'db.sqlite3'),
     }
 }
 
@@ -100,3 +109,46 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = normpath(join(SITE_ROOT, 'static'))
+STATIC_FILES_DIRS = ()
+
+# Django Pipeline (and browserify)
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'pipeline.finders.PipelineFinder',
+)
+
+# browserify-specific
+PIPELINE_COMPILERS = (
+    'pipeline_browserify.compiler.BrowserifyCompiler',
+)
+
+PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.NoopCompressor'
+PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.uglifyjs.UglifyJSCompressor'
+
+if DEBUG:
+    PIPELINE_BROWSERIFY_ARGUMENTS = '-t babelify'
+
+PIPELINE_CSS = {
+    'cove_css': {
+        'source_filenames': (
+            'css/style.css',
+        ),
+        'output_filename': 'css/cove_css.css',
+    },
+}
+
+PIPELINE_JS = {
+    'cove_js': {
+        'source_filenames': (
+            'js/bower_components/jquery/dist/jquery.min.js',
+            'js/bower_components/react/JSXTransformer.js',
+            'js/bower_components/react/react-with-addons.js',
+            'js/app.browserify.js',
+        ),
+        'output_filename': 'js/cove_js.js',
+    }
+}
