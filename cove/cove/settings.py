@@ -42,7 +42,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     # Pipeline
-    'pipline',
+    'pipeline',
 
     # DRF
     'rest_framework',
@@ -132,23 +132,25 @@ PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.uglifyjs.UglifyJSCompressor'
 if DEBUG:
     PIPELINE_BROWSERIFY_ARGUMENTS = '-t babelify'
 
-PIPELINE_CSS = {
-    'cove_css': {
-        'source_filenames': (
-            'css/style.css',
-        ),
-        'output_filename': 'css/cove_css.css',
+PIPELINE = {
+    'JAVASCRIPT': {
+        'cove_js': {
+            'source_filenames': (
+                'js/bower_components/jquery/dist/jquery.min.js',
+                'js/bower_components/react/JSXTransformer.js',
+                'js/bower_components/react/react-with-addons.js',
+                'js/app.browserify.js',
+            ),
+            'output_filename': 'js/cove_js.js',
+        }
     },
-}
 
-PIPELINE_JS = {
-    'cove_js': {
-        'source_filenames': (
-            'js/bower_components/jquery/dist/jquery.min.js',
-            'js/bower_components/react/JSXTransformer.js',
-            'js/bower_components/react/react-with-addons.js',
-            'js/app.browserify.js',
-        ),
-        'output_filename': 'js/cove_js.js',
+    'STYLESHEETS': {
+        'cove_css': {
+            'source_filenames': (
+                'css/style.css',
+            ),
+            'output_filename': 'css/cove_css.css',
+        },
     }
 }

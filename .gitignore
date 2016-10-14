@@ -91,4 +91,7 @@ ENV/
 # Package Lists
 bower_components
 node_modules
+
+# Django specific
 db.sqlite3
+/static/
