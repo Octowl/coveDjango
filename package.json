@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Octowl/coveDjango#readme",
   "dependencies": {
-    "react": "^15.3.2"
+    "react": "^15.3.2",
+    "react-bootstrap": "^0.30.5"
   }
 }
