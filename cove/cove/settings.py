@@ -74,10 +74,6 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'coveDB',
-        'USER': 'coveAdmin',
-        'PASSWORD': 'SUPERSECRETPW',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
     }
 }
 
