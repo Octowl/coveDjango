@@ -1,0 +1,17 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>React Tutorial</title>
+    <link rel="stylesheet" href="{% static 'store/css/base.css' %}" />
+    <script src="{% static 'store/bower_components/react/react.min.js' %}"></script>
+    <script src="{% static 'store/bower_components/react/react-dom.min.js'%}"></script>
+    <script src="{% static 'store/bower_components/babel-standalone/babel.min.js'%}"></script>
+    <script src="{% static 'store/bower_components/jquery/dist/jquery.min.js'%}"></script>
+  </head>
+  <body>
+    <div id="content"></div>
+    <script type="text/babel" src="{% static 'store/js/app.js' %}"></script>
+  </body>
+</html>
