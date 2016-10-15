@@ -17,7 +17,5 @@
   },
   "homepage": "https://github.com/Octowl/coveDjango#readme",
   "dependencies": {},
-  "devDependencies": {
-    "babelify": "^7.3.0"
-  }
+  "devDependencies": {}
 }
