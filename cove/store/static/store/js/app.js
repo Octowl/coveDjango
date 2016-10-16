@@ -80,20 +80,27 @@ var ItemList = React.createClass({
 
     createItem: function(item) {
         return (
-            <div className="col-sm-4 col-lg-4 col-md-4">
-                <div className="thumbnail">
-                    <img src={item.image.url} alt="" />
-                    <div className="caption">
-                        <h4 className="pull-right">{item.price}KWD</h4>
-                        <h4><Link to="/">{item.name}</Link>
-                        </h4>
-                        <p>{item.description}</p>
-                    </div>
-                </div>
-            </div>
+            <Item item={item} />
         );
     }
 })
+
+var Item = function(props) {
+    var item = props.item
+    return (
+        <div className="col-sm-4 col-lg-4 col-md-4">
+            <div className="thumbnail">
+                <img src={item.image} alt="" />
+                <div className="caption">
+                    <h4 className="pull-right">{item.price}KWD</h4>
+                    <h4><Link to="/">{item.name}</Link>
+                    </h4>
+                    <p>{item.description}</p>
+                </div>
+            </div>
+        </div>
+    )
+}
 
 ReactDOM.render((
     <Router history={browserHistory}>
