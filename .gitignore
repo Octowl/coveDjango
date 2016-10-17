@@ -94,6 +94,10 @@ node_modules
 
 # Django specific
 db.sqlite3
-/static/
-.idea
 media
+
+# PyCharm
+.idea
+
+# Webpack
+bundle/
