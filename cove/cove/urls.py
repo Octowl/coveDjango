@@ -18,14 +18,11 @@ from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
 
-from rest_framework.authtoken.views import obtain_auth_token
-from store.urls import router
 
 print(settings.MEDIA_URL)
 
 urlpatterns = [
-    url(r'^api/token/', obtain_auth_token, name='api-token'),
-    url(r'^api/', include(router.urls)),
+    url(r'^api/', include('store.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + [
     url(r'^.*$', TemplateView.as_view(template_name='store/index.html')),
 ]
