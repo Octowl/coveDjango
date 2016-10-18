@@ -19,8 +19,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
-print(settings.MEDIA_URL)
-
 urlpatterns = [
     url(r'^api/', include('store.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + [
