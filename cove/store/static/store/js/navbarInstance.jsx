@@ -25,8 +25,7 @@ var NavbarInstance = function(props) {
                     </NavDropdown>
                 </Nav>
                 <Nav pullRight>
-                    <NavItem eventKey={1} href="#">Link Right</NavItem>
-                    <NavItem eventKey={2} href="#">Link Right</NavItem>
+                    <NavItem eventKey={1} href="/login">login</NavItem>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
