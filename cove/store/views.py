@@ -1,5 +1,5 @@
 from django.views.generic import View
-from django.http import JsonResponse, HttpResponse, HttpResponseServerError
+from django.http import JsonResponse, HttpResponse, HttpResponseServerError, HttpResponseNotFound
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 import json
@@ -41,10 +41,21 @@ class SignupView(View):
         user.last_name = last_name
         user.save()
 
-        print(user)
+        user = authenticate(username=email, password=password)
+        if user is not None:
+            return HttpResponse("it worked")
+        else:
+            return HttpResponseServerError("Something seriously went wrong here...")
+
+class LoginView(View):
+    def post(self, request):
+        data = json.loads(request.body)
+
+        email = data['email']
+        password = data['password']
 
         user = authenticate(username=email, password=password)
         if user is not None:
             return HttpResponse("it worked")
         else:
-            return HttpResponseServerError()
+            return HttpResponseNotFound("Wrong username or password");

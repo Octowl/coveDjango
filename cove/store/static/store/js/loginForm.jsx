@@ -51,9 +51,6 @@ var LoginContainer = React.createClass({
             }
         }
 
-        console.log(payload);
-
-
         axios.post(endpoint, payload, config)
         .then(() => browserHistory.push('/'))
         .catch(error => {
